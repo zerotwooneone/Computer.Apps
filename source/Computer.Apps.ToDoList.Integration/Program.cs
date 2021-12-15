@@ -1,6 +1,12 @@
+using Computer.Apps.ToDoList.Integration.Bus;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Computer.Apps.ToDoList.Integration.Data;
+using Computer.Apps.ToDoList.Integration.Instance;
+using Computer.Bus.Contracts;
+using Computer.Bus.ProtobuffNet;
+using Computer.Bus.RabbitMq;
+using Computer.Bus.RabbitMq.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +19,16 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<ISerializer, ProtoSerializer>();
+builder.Services.AddSingleton<IConnectionFactory, SingletonConnectionFactory>();
+builder.Services.AddSingleton<IBusClient>(serviceProvider =>
+{
+    var clientFactory = new ClientFactory();
+    var serializer = serviceProvider.GetService<ISerializer>() ?? throw new InvalidOperationException();
+    var connectionFactory = serviceProvider.GetService<IConnectionFactory>() ?? throw new InvalidOperationException();
+    return clientFactory.Create(serializer , connectionFactory);
+});
+builder.Services.AddHostedService<AppInstanceService>();
 
 var app = builder.Build();
 
