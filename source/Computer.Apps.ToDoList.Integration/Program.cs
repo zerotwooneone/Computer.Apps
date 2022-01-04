@@ -34,8 +34,6 @@ builder.Services.AddSingleton<IBusClient>(serviceProvider =>
 //domain
 builder.Services.AddDomain(builder.Configuration);
 
-builder.Services.AddHostedService<DomainStartupService>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
