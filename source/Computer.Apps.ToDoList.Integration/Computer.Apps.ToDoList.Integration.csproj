@@ -12,8 +12,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Computer.Bus.ProtobuffNet" Version="0.0.1" />
-        <PackageReference Include="Computer.Bus.RabbitMq" Version="0.0.6" />
+        <PackageReference Include="computer.bus.domain" Version="0.0.4" />
+        <PackageReference Include="Computer.Bus.ProtobuffNet" Version="0.0.3" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.0" />
@@ -22,7 +22,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Computer.Apps.ToDoList.Contracts\Computer.Apps.ToDoList.Contracts.csproj" />
+      <ProjectReference Include="..\Computer.Apps.ToDoList.Domain\Computer.Apps.ToDoList.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Domain\Model" />
     </ItemGroup>
 
 </Project>
