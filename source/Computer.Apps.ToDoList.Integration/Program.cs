@@ -4,12 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Computer.Apps.ToDoList.Integration.Data;
 using Computer.Apps.ToDoList.Integration.Domain;
 using Computer.Bus.Contracts;
-using Computer.Bus.Domain;
 using Computer.Bus.ProtobuffNet;
 using Computer.Bus.RabbitMq;
 using Computer.Bus.RabbitMq.Contracts;
-using Computer.Bus.Domain.Contracts;
-using Initializer = Computer.Bus.Domain.Initializer;
 
 var builder = WebApplication.CreateBuilder(args);
 
