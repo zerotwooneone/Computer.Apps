@@ -12,8 +12,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="computer.bus.domain" Version="0.0.4" />
-        <PackageReference Include="Computer.Bus.ProtobuffNet" Version="0.0.3" />
+        <PackageReference Include="computer.bus.domain" Version="0.0.7" />
+        <PackageReference Include="Computer.Bus.ProtobuffNet" Version="0.0.7" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.0" />

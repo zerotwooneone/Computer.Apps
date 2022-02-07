@@ -1,5 +1,5 @@
 #nullable enable
-using Computer.Bus.Domain.Contracts;
+using Computer.Bus.Domain.Contracts.Models;
 using System;
 
 namespace Computer.Apps.ToDoList.Integration.Domain;

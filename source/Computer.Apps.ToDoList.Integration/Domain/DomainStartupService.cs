@@ -43,7 +43,6 @@ public class DomainStartupService : IHostedService
                 {
                     return list;
                 }
-
                 var domain = Type.GetType(config.Domain);
                 var dto = Type.GetType(config.Dto);
                 var mapper = Type.GetType(config.Mapper);

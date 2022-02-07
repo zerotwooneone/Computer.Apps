@@ -1,7 +1,7 @@
 ﻿#nullable enable
-using Computer.Bus.Domain.Contracts;
+using Computer.Bus.Domain.Contracts.Models;
 
-namespace Computer.Apps.ToDoList.Integration.Domain;
+namespace Computer.Apps.ToDoList.Integration.Domain.Model;
 
 public class DefaultListResponseMapper : IMapper
 {
