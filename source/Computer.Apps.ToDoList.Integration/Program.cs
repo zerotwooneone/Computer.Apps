@@ -21,15 +21,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 //dto bus
-builder.Services.AddSingleton<ISerializer, ProtoSerializer>();
-builder.Services.AddSingleton<IConnectionFactory, SingletonConnectionFactory>();
-builder.Services.AddSingleton<IBusClient>(serviceProvider =>
-{
-    var clientFactory = new ClientFactory();
-    var serializer = serviceProvider.GetService<ISerializer>() ?? throw new InvalidOperationException();
-    var connectionFactory = serviceProvider.GetService<IConnectionFactory>() ?? throw new InvalidOperationException();
-    return clientFactory.Create(serializer , connectionFactory);
-});
+builder.Services.AddBus();
 
 //domain
 builder.Services.AddDomain(builder.Configuration);
