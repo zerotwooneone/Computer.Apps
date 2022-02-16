@@ -21,7 +21,7 @@ public class AppInstanceService
     {
         _subscriptions.AddRange(new []
         {
-            await _bus.Subscribe<AppConnectionRequest>(Events.GetConnection, OnAppConnectionRequest),
+            await _bus.Subscribe<AppConnectionRequest>(Events.GetConnection, OnAppConnectionRequest).ConfigureAwait(false),
             _requestService.Listen<DefaultListRequest, DefaultListResponse>(Events.DefaultListRequest, Events.DefaultListResponse, OnDefaultListRequest),
         });
         //await _busClient.Subscribe<AppDisconnectRequest>(Events.CloseConnection, OnAppDisconnectionRequest);
@@ -30,7 +30,18 @@ public class AppInstanceService
 
     private Task<DefaultListResponse?> OnDefaultListRequest(DefaultListRequest? param, string eventId, string correlationId)
     {
-        return Task.FromResult<DefaultListResponse?>(new DefaultListResponse { List = null, Success = false });
+        return Task.FromResult<DefaultListResponse?>(new DefaultListResponse { List = new ListModel
+        {
+            Id = "some app id",
+            Items = new []
+            {
+                new ItemModel
+                {
+                    Checked = true,
+                    Text = "Success!!!"
+                }
+            }
+        }, Success = true });
     }
 
     private async Task OnGetListRequest(GetListRequest? param, string eventid, string correlationid)
@@ -43,7 +54,7 @@ public class AppInstanceService
             Events.GetListResponse,
             response,
             eventId: null,
-            correlationid);
+            correlationid).ConfigureAwait(false);
     }
 
     private async Task OnAppDisconnectionRequest(AppDisconnectRequest? param, string eventid, string correlationid)
@@ -53,7 +64,7 @@ public class AppInstanceService
             Events.CloseConnection,
             response,
             eventId: null,
-            correlationid);
+            correlationid).ConfigureAwait(false);
     }
 
     private async Task OnAppConnectionRequest(AppConnectionRequest? param, string eventid, string correlationid)
@@ -63,7 +74,7 @@ public class AppInstanceService
             Events.GetConnectionResponse,
             response,
             eventId: null,
-            correlationid);
+            correlationid).ConfigureAwait(false);
     }
 
     public Task StopAsync(CancellationToken cancellationToken)
